@@ -1,0 +1,91 @@
+/* Set the background color, font family, font color, margin, and padding for the body */
+body {
+  background-color: #6e6e80;
+  font-family: Arial, sans-serif;
+  color: #ccc;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Set the font color and alignment for h1 */
+h1 {
+  color: #ccc;
+  text-align: center;
+}
+
+/* Set the margin and alignment for the form */
+form {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Set the width, height, padding, border, border-radius, font size, outline, and resize for textarea */
+textarea {
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  resize: vertical;
+}
+
+/* Set the display, margin-top, font size, and font color for labels */
+label {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+  color: #ccc;
+}
+
+/* Set the width, padding, border, border-radius, font size, and outline for select elements */
+select {
+  width: 170px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+}
+
+/* Set the styles for the call-to-action buttons */
+.cta, button[type="submit"], .download-btn {
+  display: inline-block;
+  background-color: #337ab7;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Set the background color on hover for the call-to-action buttons and download button */
+.cta:hover, button[type="submit"]:hover, .download-btn:hover {
+  background-color: #23527c;
+}
+
+/* Set the margin-top and font color for paragraphs */
+p {
+  margin-top: 30px;
+  color: #000000;
+}
+
+/* Set the background color, border, border-radius, padding, white space, font size, and overflow for pre elements */
+pre {
+  background-color: #acacbe;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  white-space: pre-wrap;
+  font-size: 16px;
+  overflow-x: auto;
+}
+
+/* Set the transparent background on hover (50% opacity) for pre elements */
+pre:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}

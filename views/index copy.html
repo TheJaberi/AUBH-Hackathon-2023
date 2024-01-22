@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+<head>
+  <title>Ascii-art Generator</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Page title -->
+  <h1>Ascii-art Generator</h1>
+
+  <!-- Form for generating ASCII art -->
+  <form method="POST" action="/ascii-art">
+    {{if .ShowOutput}}<a href="data:text/plain;charset=utf-8,{{.Output}}" download="ascii-art-output.txt" class="download-btn">Download</a>{{end}}
+    <br><br>
+
+    <!-- Text input area -->
+    <textarea id="textbox" name="textbox" placeholder="Enter text here" rows="4">{{.Str}}</textarea>
+    <br>
+
+    <!-- Select banner style -->
+    <label for="style">Banner:</label>
+    <select id="style" name="style">
+      {{if .ShowOutput}}<option value="{{.Font}}"> Recent: {{.Font}}</option>{{end}}
+      <option value="standard">Standard</option>
+      <option value="shadow">Shadow</option>
+      <option value="thinkertoy">Thinkertoy</option>
+      <option value="doom">Doom</option>
+      <option value="extrafont">extrafont</option>
+    </select>
+
+    <!-- Color picker -->
+    <input type="color" id="color" name="color" class="color-picker" value="{{.Color}}">
+    <br>
+
+    <!-- Select alignment -->
+    <label for="alignment">Alignment:</label>
+    <select id="alignment" name="alignment">
+      {{if .ShowOutput}}<option value="{{.Alignment}}"> Recent: {{.Alignment}}</option>{{end}}
+      <option value="text-left">Left</option>
+      <option value="text-center">Center</option>
+      <option value="text-right">Right</option>      
+    </select>
+
+    <!-- Submit button -->
+    <button type="submit">Submit</button>
+    <br>
+  </form>
+
+  <!-- Display the generated ASCII art or error message -->
+  {{if .ShowOutput}}
+  <pre style="text-align: {{.Alignment}};"><span style="color:{{.Color}}">{{.Output}}</span></pre>
+  {{else}}
+  <pre> <p>No output to show.</p></pre>
+  {{end}}
+</body>
+</html>

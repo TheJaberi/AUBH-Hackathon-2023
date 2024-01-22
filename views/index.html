@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handwritten Paper Grader</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 500px;
+      max-width: 100%;
+    }
+
+    h2 {
+      color: #333;
+      font-size: 1.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .form-group {
+      margin-bottom: 1em;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+      color: #666;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .upload-btn-wrapper {
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .btn {
+      border: 2px solid #007bff;
+      color: #007bff;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+      font-size: 100px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      z-index: 2; /* Ensure the input is above the text */
+    }
+
+    .filename {
+      display: block;
+      margin-top: 10px;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .submit-btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 30px;
+      text-transform: uppercase;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .submit-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" action="/grader" enctype="multipart/form-data">
+    <div class="container">
+      <h2>Handwritten Paper Grader</h2>
+      
+      <div class="form-group">
+        <label for="studentName">Student name:</label>
+        <input type="text" id="studentName" name="studentName" placeholder="Enter student name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="courseName">Course name:</label>
+        <input type="text" id="courseName" name="courseName" placeholder="Enter course name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="paperUpload">Upload student test</label>
+        <div class="upload-btn-wrapper">
+          <button class="btn">Upload file</button>
+          <span class="filename" id="paperUploadFilename"></span>
+          <input type="file" id="paperUpload" name="paperUpload" required onchange="checkFiles(this)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="keyUpload">Upload answer key</label>
+        <div class="upload-btn-wrapper">
+          <button class="btn">Upload file</button>
+          <span class="filename" id="keyUploadFilename"></span>
+          <input type="file" id="keyUpload" name="keyUpload" required onchange="checkFiles(this)">
+        </div>
+      </div>
+
+      <button type="submit" id="submitBtn" class="submit-btn" disabled>Start Grading</button>
+    </div>
+  </form>
+
+  <script>
+    function checkFiles(input) {
+      const submitBtn = document.getElementById('submitBtn');
+      const paperUpload = document.getElementById('paperUpload');
+      const keyUpload = document.getElementById('keyUpload');
+      const paperUploadFilename = document.getElementById('paperUploadFilename');
+      const keyUploadFilename = document.getElementById('keyUploadFilename');
+
+      if (input.id === 'paperUpload' && input.files.length > 0) {
+        paperUploadFilename.textContent = input.files[0].name;
+      } else if (input.id === 'keyUpload' && input.files.length > 0) {
+        keyUploadFilename.textContent = input.files[0].name;
+      }
+
+      submitBtn.disabled = !(paperUpload.value && keyUpload.value);
+    }
+  </script>
+</body>
+</html>
