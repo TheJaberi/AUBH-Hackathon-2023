@@ -7,7 +7,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-	// "github.com/otiai10/gosseract/v2"
+
+	// "github.com/otiai10/gosseract"
+	"github.com/otiai10/gosseract/v2"
 )
 
 // FormHandler handles HTTP requests for the form submission.
@@ -60,22 +62,22 @@ func FormHandler(w http.ResponseWriter, r *http.Request) {
 		uploadedFiles[inputName] = dstFilePath
 	}
 
-	// // Perform OCR using gosseract on the uploaded images
-	// for key, filePath := range uploadedFiles {
-	// 	client := gosseract.NewClient()
-	// 	defer client.Close()
-	// 	if err := client.SetImage(filePath); err != nil {
-	// 		fmt.Printf("Error setting image for OCR: %v\n", err)
-	// 		continue // Continue with the next image
-	// 	}
-	// 	text, err := client.Text()
-	// 	if err != nil {
-	// 		fmt.Printf("Error performing OCR on image %s: %v\n", key, err)
-	// 		continue // Continue with the next image
-	// 	}
-	// 	fmt.Printf("Extracted Text for %s: %s\n", key, text)
-	// 	// Do something with the extracted text, like storing it in a database or file
-	// }
+	// Perform OCR using gosseract on the uploaded images
+	for key, filePath := range uploadedFiles {
+		client := gosseract.NewClient()
+		defer client.Close()
+		if err := client.SetImage(filePath); err != nil {
+			fmt.Printf("Error setting image for OCR: %v\n", err)
+			continue // Continue with the next image
+		}
+		text, err := client.Text()
+		if err != nil {
+			fmt.Printf("Error performing OCR on image %s: %v\n", key, err)
+			continue // Continue with the next image
+		}
+		fmt.Printf("Extracted Text for %s: %s\n", key, text)
+		// Do something with the extracted text, like storing it in a database or file
+	}
 
 	// Render the template or redirect to a success page
 	tmpl := template.Must(template.ParseFiles("views/index.html"))
